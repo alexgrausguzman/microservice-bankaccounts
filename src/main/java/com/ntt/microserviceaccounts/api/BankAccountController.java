@@ -18,55 +18,40 @@ public class BankAccountController {
     @Autowired
     private BankAccountService bankAccountService;
 
-    @Autowired
-    private CustomerService customerService;
-
-
-
+    /**
+     * This method fetches a list of bank accounts from the database
+     * and returns them as a response entity with a status code of 200 (OK)
+     * if the operation is successful.
+     * @return A response entity containing a list of bank accounts.
+     */
     @GetMapping
-    public List<BankAccount> fetchAll(){
-        return bankAccountService.getAll();
-    }
-    @GetMapping("customers")
-    public List<Customer> getCustomers(){
-        return customerService.getAll();
+    public ResponseEntity<List<BankAccount>> fetchAll(){
+        return ResponseEntity.ok(bankAccountService.getAll());
     }
 
-    @GetMapping("{documentNumber}")
-    public List<BankAccount> getAllAccounts(@PathVariable String documentNumber){
-        return bankAccountService.getAllAccountsCustomer(documentNumber);
+    /**
+     * The method filters the accounts by user.
+     *
+     * @param documentNumber The customer document number.
+     * @return A list of accounts.
+     */
+    @GetMapping("accounts")
+    public ResponseEntity<List<BankAccount>> getAllAccounts(@RequestParam("document") String documentNumber){
+        return ResponseEntity.ok(bankAccountService.getAllAccountsCustomer(documentNumber));
     }
+
+    /**
+     * This method fetches a bank account from the database based on the provided
+     * account number and returns it.
+     *
+     * @param accountNumber The account number of the bank account to retrieve.
+     * @return The bank account matching the provided account number or an HTTP 404 response if not found.
+     */
     @GetMapping("accountnumber/{accountNumber}")
     public BankAccount getBankAccount(@PathVariable String accountNumber){
         return bankAccountService.getBankAccount(accountNumber);
     }
 
-    @PatchMapping("{id}")
-    public void updatePatchCustomer(@PathVariable Long id,@RequestBody Customer customer){
-        customerService.patchUpdateCustomer(id, customer);
-    }
 
-    @DeleteMapping("{id}")
-    public  void delete(@PathVariable Long id){
-        customerService.deleteCustomer(id);
-    }
 
-/*
-    @PostMapping("{typeCustomer}/{documentNumber}")
-    public String savePersonalAccount(@RequestBody BankAccount bankAccount,@PathVariable String documentNumber,@PathVariable String typeCustomer){
-        if (bankAccountService.validateCustomerAccount(documentNumber, typeCustomer)){
-            return bankAccountService.save(bankAccount, documentNumber).toString();
-        }
-        return "No Cumple con los requisitos";
-    }
-*/
-    /*
-    @PostMapping("empresarial/{documentNumber}")
-    public String saveEmpresarialAccount(@RequestBody BankAccount bankAccount,@PathVariable String documentNumber){
-        if (bankAccountService.validateCustomerAccount(documentNumber)){
-            return bankAccountService.save(bankAccount, documentNumber).toString();
-        }
-        return "No Cumple con los requisitos";
-    }
-        */
 }
