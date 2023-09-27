@@ -7,4 +7,6 @@ import java.util.List;
 public interface CurrentAccountService {
     List<CurrentAccount> getAll();
     String save(CurrentAccount account, String documentNumber);
+
+    String updateCurrentCustomer(CurrentAccount account, String documentNumber);
 }

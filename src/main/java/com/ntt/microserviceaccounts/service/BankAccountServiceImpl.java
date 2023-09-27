@@ -38,6 +38,8 @@ public class BankAccountServiceImpl implements BankAccountService {
     public List<BankAccount> getAllAccountsCustomer(String documentNumber) {
         return bankAccountRepository.findByDocumentNumber(documentNumber);
     }
+
+
     @Override
     public BankAccount getBankAccount(String accountNumber) {
         if (!bankAccountRepository.existsByAccountNumber(accountNumber)){

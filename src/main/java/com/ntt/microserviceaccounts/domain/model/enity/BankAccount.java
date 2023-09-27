@@ -25,5 +25,6 @@ public class BankAccount {
     private String interbankAccountCode;
     private String documentNumber;
     private boolean maintenanceFeeFree;
-    //private String typeAccount;
+    private String typeAccount;
+    private int completedTransactions;
 }

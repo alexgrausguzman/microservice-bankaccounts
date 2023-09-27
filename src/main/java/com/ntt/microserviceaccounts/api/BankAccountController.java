@@ -5,6 +5,8 @@ import com.ntt.microserviceaccounts.domain.model.enity.Customer;
 import com.ntt.microserviceaccounts.domain.service.BankAccountService;
 import com.ntt.microserviceaccounts.external.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +20,8 @@ public class BankAccountController {
 
     @Autowired
     private CustomerService customerService;
+
+
 
     @GetMapping
     public List<BankAccount> fetchAll(){
@@ -35,6 +39,16 @@ public class BankAccountController {
     @GetMapping("accountnumber/{accountNumber}")
     public BankAccount getBankAccount(@PathVariable String accountNumber){
         return bankAccountService.getBankAccount(accountNumber);
+    }
+
+    @PatchMapping("{id}")
+    public void updatePatchCustomer(@PathVariable Long id,@RequestBody Customer customer){
+        customerService.patchUpdateCustomer(id, customer);
+    }
+
+    @DeleteMapping("{id}")
+    public  void delete(@PathVariable Long id){
+        customerService.deleteCustomer(id);
     }
 
 /*

@@ -12,6 +12,7 @@ public interface BankAccountService {
 
     List<BankAccount> getAllAccountsCustomer(String documentNumber);
 
+
     BankAccount getBankAccount(String accountNumber);
     boolean validateAccount(String accountNumber);
 

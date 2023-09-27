@@ -38,5 +38,12 @@ public class CurrentAccountServiceImpl implements CurrentAccountService {
        return "Registro éxitoso";
     }
 
+    @Override
+    public String updateCurrentCustomer(CurrentAccount account, String documentNumber) {
+
+
+        return "";
+    }
+
 
 }
